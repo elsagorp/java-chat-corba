@@ -9,6 +9,7 @@ module conn
         void listChatRooms(in string token);
         void joinChatRoom(in string token, in string name);
         void leaveChatRoom(in string token);
+        void listUsers(in string token);
         void changeName(in string token, in string name);
     };
 };
