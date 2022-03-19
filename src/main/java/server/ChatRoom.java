@@ -23,7 +23,14 @@ public class ChatRoom {
     public String getName() {
         return name;
     }
-
+    public ArrayList<String> getUsers() {
+     ArrayList<String> userss = new ArrayList<String>();
+     for(HashMap.Entry<String,User> entry: users.entrySet()){
+     	User x = entry.getValue();
+     	userss.add(x.getName());
+     }
+        return userss;
+    }
     public void addMessage(User user, Message message) {
         lock.writeLock().lock();
         if (!expired) {
