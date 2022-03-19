@@ -1,4 +1,4 @@
-#java-chat-corba
+# Java-Chat-Corba
 
 A simple chat system using Java and CORBA. 
 
