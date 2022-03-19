@@ -79,7 +79,24 @@ class ConnImpl extends ConnPOA {
             System.out.println("Invalid token given for listing chat rooms.");
         }
     }
-
+     public void listUsers(String token) {
+        User user = server.getUser(token);
+        if (user != null) {
+            String room = user.getChatRoom();
+            ChatRoom chatRoom = server.getChatRoom(room);
+            String str = "USERS:\n";
+            if(room != null){
+            	ArrayList<String> chatUsers = chatRoom.getUsers();
+            	for (String u : chatUsers) {
+                
+                   str += u + "\n";
+            	}
+            user.addMessage(str.substring(0, str.length()-1));
+           }
+        } else {
+            System.out.println("Invalid token given for listing users of the chat room.");
+        }
+    }
     public void joinChatRoom(String token, String name) {
         User user = server.getUser(token);
         if (user != null) {
