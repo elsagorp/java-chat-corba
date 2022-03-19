@@ -12,12 +12,14 @@ public class ConnClient
 {
     static final String CMD_PREFIX = "/";
     static final String CMD_CREATE = CMD_PREFIX + "create ";
-    static final String CMD_LIST   = CMD_PREFIX + "list";
+    static final String CMD_LIST_R   = CMD_PREFIX + "list rooms";
     static final String CMD_JOIN   = CMD_PREFIX + "join ";
     static final String CMD_LEAVE  = CMD_PREFIX + "leave";
     static final String CMD_HELP   = CMD_PREFIX + "help";
     static final String CMD_NAME   = CMD_PREFIX + "name ";
     static final String CMD_QUIT   = CMD_PREFIX + "quit";
+    
+    static final String CMD_LIST_U   = CMD_PREFIX + "list users";
 
     static Conn connImpl;
     static String token;
@@ -32,11 +34,11 @@ public class ConnClient
             }
         }
 
-        void parse(String str) {
+      void parse(String str) {
             if (str.startsWith(CMD_CREATE)) {
                 String name = str.substring(CMD_CREATE.length());
                 connImpl.createChatRoom(token, name);
-            } else if (str.startsWith(CMD_LIST)) {
+            } else if (str.startsWith(CMD_LIST_R)) {
                 connImpl.listChatRooms(token);
             } else if (str.startsWith(CMD_JOIN)) {
                 String name = str.substring(CMD_JOIN.length());
@@ -50,6 +52,8 @@ public class ConnClient
                 connImpl.changeName(token, name);
             } else if (str.startsWith(CMD_QUIT)) {
                 System.exit(0);
+            } else if (str.startsWith(CMD_LIST_U)) {
+            	connImpl.listUsers(token);
             } else {
                 connImpl.sendMessage(token, str);
             }
@@ -58,11 +62,12 @@ public class ConnClient
         void help() {
             String str = "Commands:\n" +
                     CMD_CREATE + "\n" +
-                    CMD_LIST + "\n" +
+                    CMD_LIST_R + "\n" +
                     CMD_JOIN + "\n" +
                     CMD_LEAVE + "\n" +
                     CMD_HELP + "\n" +
                     CMD_NAME + "\n" +
+                    CMD_LIST_U + "\n" +
                     CMD_QUIT;
             System.out.println(str);
         }
